@@ -5,8 +5,8 @@ RUN apt-get update \
  && rm -r /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY requirements.txt /
 
+COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
 USER 1000
@@ -17,8 +17,9 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 FROM python as prod
 
 COPY requirements.txt /
-
 RUN pip install -r /requirements.txt
+
+WORKDIR /app
 
 USER 1000
 WORKDIR /app

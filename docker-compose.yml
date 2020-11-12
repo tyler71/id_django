@@ -2,8 +2,12 @@ version: '3.7'
 
 services:
     id.dev.tylery.org:
+        environment:
+            - HOST
+            - DEBUG
+            - SECRET_KEY
         labels:
-            caddy: id.dev.lan
+            caddy: ${HOST}
             caddy.reverse_proxy: "{{ upstreams 8000 }}"
         build: 
             context: .
