@@ -15,3 +15,6 @@ class ImageUnit(models.Model):
     submitted    = models.DateTimeField()
     submitted_by = models.ForeignKey(Users, on_delete=models.CASCADE)
 
+class SubmittedImage(models.Model):
+    imageunit    = models.ForeignKey(ImageUnit, on_delete=models.CASCADE)
+    image        = models.FileField(upload_to='pending_conversion')
