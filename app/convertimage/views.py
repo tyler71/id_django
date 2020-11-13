@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render
 from datetime import datetime
 
 
@@ -7,11 +7,14 @@ from .models import ImageUnit
 from .forms import NewImageForm
 from .utils import conversion_choices
 
-def home(request, data=None):
-    return render(request, 'home.html')
+def home(request):
+    if request.method == 'POST':
+        return render(request, 'home.html', new_image(request))
+    else:
+        form = NewImageForm()
+    return render(request, 'home.html', {'new_image_form': form})
 
 def new_image(request):
-    if request.method == 'POST':
         form = NewImageForm(request.POST, request.FILES)
         if form.is_valid():
             submitted_images = [img for img in request.FILES.getlist('images')]
@@ -32,8 +35,4 @@ def new_image(request):
                 None,
             ))
             data.save()
-            d = {'img_object': data}
-            return render(request, 'new_image.html', d)
-    else:
-        form = NewImageForm()
-    return render(request, 'new_image.html', {'new_image_form': form})
+            return {'img_object': data}
