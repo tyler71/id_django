@@ -18,7 +18,7 @@ def new_image(request):
             img_count = len(submitted_images)
             selected_method = form.cleaned_data['type']
             converted_img = conversion_choices[selected_method](submitted_images).return_image()
-            converted_img_name = 'image_ '
+            converted_img_name = 'image'
             data = ImageUnit()
             data.images_used = img_count
             data.conversion = selected_method
