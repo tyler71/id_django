@@ -1,6 +1,10 @@
 from django import forms
-from .models import ConversionType
 
 class NewImageForm(forms.Form):
-    type   = forms.ModelChoiceField(queryset=ConversionType.objects.all())
+    conversion_choices = (
+        ('Median', 'Median'),
+        ('Mean',   'Mean'),
+        ('Mode',   'Mode'),
+    )
+    type   = forms.ChoiceField(choices=conversion_choices)
     images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))

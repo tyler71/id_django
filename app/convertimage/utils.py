@@ -113,3 +113,9 @@ class ImageMode(ImageArray):
             index.insert(axis, np.argmax(counts, axis=axis))
             return sort[index], counts[index]
         return mode(stacked_image_arrays)[0]
+
+conversion_choices = {
+    'Mean': ImageMean,
+    'Median': ImageMedian,
+    'Mode': ImageMode,
+}

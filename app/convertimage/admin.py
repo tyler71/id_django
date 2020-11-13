@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ImageUnit, SubmittedImage, Users, ConversionType
+from .models import ImageUnit, SubmittedImage, Users
 
 class SubmittedImageAdmin(admin.StackedInline):
     model = SubmittedImage
@@ -14,8 +14,4 @@ class ImageUnitAdmin(admin.ModelAdmin):
 
 @admin.register(SubmittedImage)
 class SubmittedImageAdmin(admin.ModelAdmin):
-    pass
-
-@admin.register(ConversionType)
-class ConversionTypeAdmin(admin.ModelAdmin):
     pass
