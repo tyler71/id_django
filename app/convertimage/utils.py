@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
+import hashlib
+from io import BytesIO
 
 import numpy as np
 from PIL import Image
+from django.core.files.base import ContentFile
 
-class ImageArray():
+
+class ImageArray:
     """
     Load each image into a array, stack on top on other image arrays
     and run _process_image
@@ -17,6 +21,12 @@ class ImageArray():
     def _load_image(self, _file):
         with Image.open(_file) as img:
             return np.array(img)
+
+    def return_image(self):
+        buffer = BytesIO()
+        img = Image.fromarray(self.flattened_image_array.astype('uint8'))
+        img.save(fp=buffer, format="JPEG")
+        return ContentFile(buffer.getvalue())
 
     def save_image(self, save_location):
         image = Image.fromarray(self.flattened_image_array.astype('uint8'))

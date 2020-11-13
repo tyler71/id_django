@@ -2,9 +2,10 @@
 {% block title %}New Image{% endblock %}
 
 {% block content %}
-{% if converted_img %}
+{% if img_object %}
 <div class="container">
-    a image
+    <img src="{{ img_object.result.url }}">
+    {{ img_object.images_used }}
 </div>
 {% else %}
 <form action="{% url 'new_image' %}" enctype="multipart/form-data" method="post">
