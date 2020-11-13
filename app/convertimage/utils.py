@@ -3,7 +3,7 @@ import hashlib
 from io import BytesIO
 
 import numpy as np
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 from django.core.files.base import ContentFile
 
 
@@ -14,19 +14,33 @@ class ImageArray:
     """
     def __init__(self, images):
         self.images = [self._load_image(image)
-                       for image in images]
+                       for image in images if image is not None]
         self.stacked_image_arrays = np.stack(self.images)
         self.flattened_image_array = self._process_image(self.stacked_image_arrays)
 
     def _load_image(self, _file):
-        with Image.open(_file) as img:
-            return np.array(img)
+        try:
+            with Image.open(_file) as img:
+                return np.array(img)
+        except UnidentifiedImageError:
+            print("Invalid image, skipping")
+            return None
 
     def return_image(self):
         buffer = BytesIO()
         img = Image.fromarray(self.flattened_image_array.astype('uint8'))
         img.save(fp=buffer, format="JPEG")
         return ContentFile(buffer.getvalue())
+
+    def image_hash(self):
+        img = Image.fromarray(self.flattened_image_array.astype('uint8'))
+        img = img.resize((10, 10), Image.ANTIALIAS)
+        img = img.convert("L")
+        pixel_data = list(img.getdata())
+        avg_pixel = sum(pixel_data) / len(pixel_data)
+        bits = "".join(['1' if (px >= avg_pixel) else '0' for px in pixel_data])
+        hex_representation = str(hex(int(bits, 2)))[2:][::-1].upper()
+        return hex_representation
 
     def save_image(self, save_location):
         image = Image.fromarray(self.flattened_image_array.astype('uint8'))

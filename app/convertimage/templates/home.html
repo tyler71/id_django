@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 
 {% block title %}Home{% endblock %}
 
@@ -9,18 +10,24 @@
   <hr class="my-4">
   <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#convert" role="button">Learn more</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'home' %}" role="button">Convert a image</a>
+    <a class="btn btn-primary btn-lg" href="https://tylery.org" role="button">Author Home Page</a>
   </p>
 </div>
 <div class="container" id="convert">
   {% if img_object %}
-    <img src="{{ img_object.result.url }}">
-    {{ img_object.images_used }}
+    <div class="card" style="width: 18rem;">
+        <a href="{{ img_object.result.url }}"><img class="card-img-top" src="{{ img_object.result.url }}"></a>
+        <p class="card-body">Uploaded using {{ img_object.images_used }} images</p>
+        <p class="card-text"><small class="text-muted">Uploaded on {{ img_object.result.submitted }}</small></p>
+    </div>
   {% else %}
     <form action="{% url 'home' %}" enctype="multipart/form-data" method="post">
       {% csrf_token %}
-      {{ new_image_form }}
-      <input type="submit" value="Submit">
+      {% bootstrap_form new_image_form layout='inline' %}
+      {% buttons %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+      {% endbuttons %}
     </form>
   {% endif %}
 </div>

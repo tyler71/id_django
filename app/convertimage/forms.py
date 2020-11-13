@@ -7,4 +7,4 @@ class NewImageForm(forms.Form):
         ('Mode',   'Mode'),
     )
     type   = forms.ChoiceField(choices=conversion_choices)
-    images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))

@@ -189,4 +189,4 @@ dmypy.json
 cython_debug/
 
 justfile
-uploads/
+app/uploads/
