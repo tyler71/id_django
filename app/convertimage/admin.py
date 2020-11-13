@@ -15,3 +15,7 @@ class ImageUnitAdmin(admin.ModelAdmin):
 @admin.register(SubmittedImage)
 class SubmittedImageAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(ConversionType)
+class ConversionTypeAdmin(admin.ModelAdmin):
+    pass

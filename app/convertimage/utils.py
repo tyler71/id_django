@@ -9,8 +9,8 @@ class ImageArray():
     and run _process_image
     """
     def __init__(self, images):
-        self.images = (self._load_image(image)
-                       for image in images)
+        self.images = [self._load_image(image)
+                       for image in images]
         self.stacked_image_arrays = np.stack(self.images)
         self.flattened_image_array = self._process_image(self.stacked_image_arrays)
 
