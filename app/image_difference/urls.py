@@ -21,5 +21,5 @@ from convertimage import views as convertimage
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', convertimage.home, name='home'),
-    path('new/', convertimage.new_image, name='newimage'),
+    path('new/', convertimage.new_image, name='new_image'),
 ]
