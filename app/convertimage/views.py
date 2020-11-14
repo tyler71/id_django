@@ -9,7 +9,12 @@ from .utils import conversion_choices
 
 def home(request):
     if request.method == 'POST':
-        return render(request, 'home.html', process_image(request))
+        result = process_image(request)
+        img_name = result['img_name']
+        if request.session.get('related_images', None) is None:
+            request.session['related_images'] = list()
+        request.session['related_images'].append(img_name)
+        return render(request, 'home.html', result)
     else:
         form = NewImageForm()
     return render(request, 'home.html', {'new_image_form': form})
@@ -36,4 +41,8 @@ def process_image(request):
                 None,
             ))
             data.save()
-            return {'img_object': data}
+            content = {
+                'img_name'  : converted_img_name,
+                'img_object': data,
+            }
+            return content
