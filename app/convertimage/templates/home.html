@@ -5,10 +5,10 @@
 
 {% block content %}
 <div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <h1 class="display-4">Image Difference</h1>
+  <p class="lead">Stack your images and flatten them into a single image!</p>
   <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <p>Powered by NumPY and Django</p>
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="{% url 'home' %}" role="button">Convert a image</a>
     <a class="btn btn-primary btn-lg" href="https://tylery.org" role="button">Author Home Page</a>
@@ -19,7 +19,7 @@
     <div class="card" style="width: 18rem;">
         <a href="{{ img_object.result.url }}"><img class="card-img-top" src="{{ img_object.result.url }}"></a>
         <p class="card-body">Uploaded using {{ img_object.images_used }} images</p>
-        <p class="card-text"><small class="text-muted">Uploaded on {{ img_object.result.submitted }}</small></p>
+        <p class="card-text ml-1"><small class="text-muted">Uploaded on {{ img_object.submitted | date:'l jS' }}</small></p>
     </div>
   {% else %}
     <form action="{% url 'home' %}" enctype="multipart/form-data" method="post">
