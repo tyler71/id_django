@@ -4,15 +4,17 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="jumbotron">
-  <h1 class="display-4">Image Difference</h1>
-  <p class="lead">Stack your images and flatten them into a single image!</p>
-  <hr class="my-4">
-  <p>Powered by NumPY and Django</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg mt-1" href="{% url 'home' %}" role="button">Convert a image</a>
-    <a class="btn btn-primary btn-lg mt-1" href="https://tylery.org" role="button">Author Home Page</a>
-  </p>
+<div class="container fluid">
+  <div class="jumbotron">
+    <h1 class="display-4">Image Difference</h1>
+    <p class="lead">Stack your images and flatten them into a single image!</p>
+    <hr class="my-4">
+    <p>Powered by NumPY and Django</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg mt-1" href="{% url 'home' %}" role="button">Convert a image</a>
+      <a class="btn btn-primary btn-lg mt-1" href="https://tylery.org" role="button">Author Home Page</a>
+    </p>
+  </div>
 </div>
 <div class="container" id="convert">
   {% if img_object %}
