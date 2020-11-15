@@ -15,7 +15,6 @@ def home(request):
         request.session['related_images'] = list()
     if request.method == 'POST':
         data = _process_images(request.POST, request.FILES)
-        # data.save()
         request.session['related_images'].append(data.pk)
         request.session.modified = True
     session_rel_img = request.session['related_images']
