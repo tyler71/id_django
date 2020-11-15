@@ -24,9 +24,10 @@ def home(request):
         return render(request, 'home.html', context)
     else:
         form = NewImageForm()
+        related_images = list()
 
         if request.session.get('related_images', None) is None:
-            related_images = None
+            request.session['related_images'] = list()
         else:
             session_rel_img = request.session['related_images']
             related_images = _related_ordered_images(session_rel_img)

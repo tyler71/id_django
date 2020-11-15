@@ -33,11 +33,13 @@ Variables needed:
 <div class="container center">
   <div class="row">
   {% with img_object=related_images|first %}
+  {% if img_object %}
     <div class="card col">
       <a href="{{ img_object.result.url }}"><img class="card-img-top" src="{{ img_object.result.url }}"></a>
       <p class="card-body">Uploaded using {{ img_object.images_used }} images</p>
       <p class="card-text ml-1"><small class="text-muted">Uploaded on {{ img_object.submitted | date:'l jS' }}</small></p>
     </div>
+  {% endif %}
   {% endwith %}
   </div>
 </div>
