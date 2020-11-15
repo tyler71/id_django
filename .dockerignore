@@ -1,0 +1,5 @@
+**/*.jpg
+app/db.sqlite3
+
+.git
+.dockerignore

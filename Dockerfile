@@ -34,6 +34,8 @@ USER 1000
 COPY --chown=1000:1000 ./app/ /app/
 
 WORKDIR /app
-RUN ./manage.py collectstatic --noinput
+RUN ./manage.py makemigrations \
+ && ./manage.py migrate        \
+ && ./manage.py collectstatic --noinput
 
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--access-logfile", "-", "image_difference.wsgi"]
