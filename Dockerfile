@@ -20,6 +20,7 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 FROM python:slim as prod
 ENV DEBUG=False
+ENV LOG=WARNING
 
 EXPOSE 8000
 

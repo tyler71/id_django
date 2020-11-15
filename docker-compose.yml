@@ -5,6 +5,7 @@ services:
         environment:
             - HOST
             - DEBUG
+            - LOG
             - SECRET_KEY
         labels:
             caddy: ${HOST}
