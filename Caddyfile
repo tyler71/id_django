@@ -1,5 +1,10 @@
 :8080 {
-    log
-    file_server /app/data/*
-    reverse_proxy localhost:8000
+#   log
+    handle /uploads/* {
+        root * /app/data
+        file_server
+    }
+    handle {
+        reverse_proxy localhost:8000
+    }
 }
