@@ -8,13 +8,15 @@ from .forms import NewImageForm
 from .utils import conversion_choices
 
 def home(request):
+    ImageUnit.objects.filter()
     if request.method == 'POST':
-        result = process_image(request)
-        img_name = result['img_name']
+        context = process_image(request)
+        img_hash = context['img_hash']
         if request.session.get('related_images', None) is None:
             request.session['related_images'] = list()
-        request.session['related_images'].append(img_name)
-        return render(request, 'home.html', result)
+        request.session['related_images'].append(img_hash)
+        context['request'] = request
+        return render(request, 'home.html', context)
     else:
         form = NewImageForm()
     return render(request, 'home.html', {'new_image_form': form})
@@ -29,6 +31,7 @@ def process_image(request):
             converted_img = img.return_image()
             converted_img_name = img.image_hash() + '.jpg'
             data = ImageUnit()
+            data.hash = img.image_hash()
             data.images_used = img_count
             data.conversion = selected_method
             data.submitted = datetime.now()
@@ -42,7 +45,7 @@ def process_image(request):
             ))
             data.save()
             content = {
-                'img_name'  : converted_img_name,
+                'img_hash'  : img.img_hash(),
                 'img_object': data,
             }
             return content
