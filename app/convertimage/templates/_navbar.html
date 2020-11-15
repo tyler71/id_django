@@ -1,3 +1,24 @@
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'home' %}">Image Difference</a>
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light flex-nowrap sticky-top">
+    <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#listitems">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <span class="w-100"><a class="navbar-brand" href="{% url 'home' %}">Image Difference</a></span>
+
+    <div id="listitems" class="navbar-collapse collapse w-100 justify-content-center">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="https://tylery.org">Author</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://github.com/tyler71/id_django">Github</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://github.com/tyler71/id_django/issues">Issues</a>
+            </li>
+        </ul>
+    </div>
+    <div class="w-100"><!--spacer--></div>
 </nav>
+
+

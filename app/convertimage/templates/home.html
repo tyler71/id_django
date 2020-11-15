@@ -15,9 +15,6 @@ Variables needed:
     <p class="lead">Stack your images and flatten them into a single image!</p>
     <hr class="my-4">
     <p>Powered by NumPY and Django</p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg mt-1" href="https://tylery.org" role="button">Author Home Page</a>
-    </p>
   </div>
 </div>
 <div class="container" id="convert">
@@ -48,7 +45,7 @@ Variables needed:
   {% for img_object in related_images %}
   {% if not forloop.first %}
       <div class="card col">
-        <a href="{{ img_object.result.url }}"><img class="card-img-top" src="{{ img_object.result.url }}"></a>
+        <a href="{{ img_object.result.url }}"><img class="card-img-top" src="{{ img_object.result.url }}" loading="lazy"></a>
         <p class="card-body">{{ img_object.conversion}} using {{ img_object.images_used }} images</p>
         <p class="card-text ml-1"><small class="text-muted">Uploaded on {{ img_object.submitted | date:'l jS' }}</small></p>
       </div>
