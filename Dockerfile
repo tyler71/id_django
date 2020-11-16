@@ -42,7 +42,6 @@ USER 1000
 COPY --chown=1000:1000 ./app/ /app/
 
 WORKDIR /app
-
 CMD ["/entrypoint.sh"]
 
 
@@ -56,5 +55,4 @@ RUN apt-get update \
 USER 1000
 
 WORKDIR /app
-
 CMD ["/entrypoint.sh"]

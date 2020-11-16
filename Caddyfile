@@ -4,6 +4,10 @@
         root * /app/data
         file_server
     }
+    handle /static/* {
+        root * /app/data
+        file_server
+    }
     handle {
         reverse_proxy localhost:8000
     }
