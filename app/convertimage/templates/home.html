@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load bootstrap4 %}
-
 {% comment %}
 Variables needed:
  * related_images | ImageUnit models of all related images
@@ -11,7 +11,7 @@ Variables needed:
 {% block content %}
 <div class="container fluid">
   <div class="jumbotron">
-    <h1 class="display-4">Image Difference</h1>
+    <h1 class="display-4">Image Differences</h1>
     <p class="lead">Stack your images and flatten them into a single image!</p>
     <hr class="my-4">
     <p>Powered by NumPY and Django</p>
