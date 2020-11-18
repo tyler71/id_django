@@ -6,4 +6,3 @@
 
 /usr/bin/caddy start -config /etc/caddy/Caddyfile
 /usr/local/bin/gunicorn --bind 0.0.0.0:8000 --access-logfile '-' image_difference.wsgi
-

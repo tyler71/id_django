@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+    django_app:
+        environment:
+            - HOST
+            - DEBUG
+            - LOG
+            - SECRET_KEY
+        labels:
+            caddy: ${HOST}
+            caddy.reverse_proxy: "{{ upstreams 8080 }}"
+        build: 
+            context: .
+            target: prod
+        networks:
+            - caddy
+
+networks:
+    caddy:
+        external: true

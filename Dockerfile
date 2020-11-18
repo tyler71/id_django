@@ -1,3 +1,4 @@
+# ======== Development
 FROM python as dev
 
 EXPOSE 8000
@@ -17,7 +18,7 @@ USER 1000
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
 
-
+# ======== Production
 FROM python:slim as prod
 
 EXPOSE 8000
@@ -41,6 +42,7 @@ WORKDIR /app
 CMD ["/entrypoint.sh"]
 
 
+# ======== Quality Assurance
 FROM prod as qa
 
 USER root

@@ -3,3 +3,4 @@ app/db.sqlite3
 
 .git
 .dockerignore
+app/data/*
