@@ -10,7 +10,7 @@ Variables needed:
 {% block content %}
 <div class="container fluid">
   <div class="jumbotron">
-    <h1 class="display-4">Image Differences</h1>
+    <h1 class="display-4">Image Difference</h1>
     <p class="lead">Stack your images and flatten them into a single image!</p>
     <hr class="my-4">
     <p>Powered by NumPY and Django</p>
@@ -21,7 +21,8 @@ Variables needed:
     {% csrf_token %}
     {% bootstrap_form new_image_form layout='inline' %}
     {% buttons %}
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button id="add-image-button" type="submit" class="btn btn-primary" disabled>Submit</button>
+    <span id="add-image-error-message" class="d-none" style="color: red">Error message</span>
     {% endbuttons %}
   </form>
 </div>
