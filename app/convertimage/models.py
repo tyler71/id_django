@@ -1,9 +1,5 @@
 from django.db import models
 
-# class Users(models.Model):
-#     name         = models.CharField(max_length=100)
-#     create_date  = models.DateTimeField()
-#     token        = models.CharField(max_length=100)
 
 class ImageUnit(models.Model):
     result       = models.ImageField(upload_to='imgs')
@@ -12,8 +8,4 @@ class ImageUnit(models.Model):
     submitted    = models.DateTimeField(auto_now_add=True)
     img_hash     = models.CharField(max_length=50)
     # submitted_by = models.ForeignKey(Users, on_delete=models.CASCADE)
-
-# class SubmittedImage(models.Model):
-#     imageunit    = models.ForeignKey(ImageUnit, on_delete=models.CASCADE)
-#     image        = models.FileField(upload_to='pending_conversion')
 

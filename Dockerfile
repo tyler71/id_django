@@ -47,7 +47,7 @@ FROM prod as qa
 
 USER root
 RUN apt-get update \
- && apt-get install -y sqlite3 curl pmap procps \
+ && apt-get install -y sqlite3 curl procps \
  && rm -r /var/lib/apt/lists/*
 
 USER 1000

@@ -4,7 +4,7 @@ services:
     django_app:
         environment:
             - HOST
-            - DEBUG
+            - DEBUG=False
             - LOG
             - SECRET_KEY
         labels:
