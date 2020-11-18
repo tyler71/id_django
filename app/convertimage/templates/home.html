@@ -17,7 +17,7 @@ Variables needed:
   </div>
 </div>
 <div class="container" id="convert">
-    <div class="container float-left d-inline-flex">
+    <div class="container d-inline-flex">
         <form action="{% url 'home' %}" enctype="multipart/form-data" method="post">
             {% csrf_token %}
             {% bootstrap_form new_image_form layout='inline' %}
