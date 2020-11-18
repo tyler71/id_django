@@ -9,12 +9,10 @@ services:
             - SECRET_KEY
         labels:
             caddy: ${HOST}
-            caddy.reverse_proxy: "{{ upstreams 8000 }}"
+            caddy.reverse_proxy: "{{ upstreams 8080 }}"
         build: 
             context: .
-            target: dev
-        volumes:
-            - ./app:/app
+            target: qa
         networks:
             - caddy
 

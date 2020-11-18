@@ -12,11 +12,12 @@ WORKDIR /app
 COPY requirements.txt /
 RUN pip install --no-cache-dir numpy==1.19.4 \
                                pillow==8.0.1 \
+                               django-debugtools \
  && pip install --no-cache-dir -r /requirements.txt
 
 USER 1000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 # ======== Production
 FROM python:slim as prod
@@ -41,13 +42,12 @@ COPY --chown=1000:1000 ./app/ /app/
 WORKDIR /app
 CMD ["/entrypoint.sh"]
 
-
 # ======== Quality Assurance
 FROM prod as qa
 
 USER root
 RUN apt-get update \
- && apt-get install -y sqlite3 curl \
+ && apt-get install -y sqlite3 curl pmap procps \
  && rm -r /var/lib/apt/lists/*
 
 USER 1000
