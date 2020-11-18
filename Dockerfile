@@ -1,6 +1,4 @@
 FROM python as dev
-ENV DEBUG=True
-ENV LOG=INFO
 
 EXPOSE 8000
 
@@ -17,12 +15,10 @@ RUN pip install --no-cache-dir numpy==1.19.4 \
 
 USER 1000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
 
 
 FROM python:slim as prod
-ENV DEBUG=False
-ENV LOG=WARNING
 
 EXPOSE 8000
 
