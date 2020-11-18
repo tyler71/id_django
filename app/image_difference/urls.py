@@ -22,7 +22,7 @@ from convertimage import views as convertimage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', convertimage.home, name='home'),
+    path('', convertimage.HomePage.as_view(), name='home'),
     path('api-auth/', include('rest_framework.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
