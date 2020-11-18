@@ -17,14 +17,16 @@ Variables needed:
   </div>
 </div>
 <div class="container" id="convert">
-  <form action="{% url 'home' %}" enctype="multipart/form-data" method="post">
-    {% csrf_token %}
-    {% bootstrap_form new_image_form layout='inline' %}
-    {% buttons %}
-    <button id="add-image-button" type="submit" class="btn btn-primary" disabled>Submit</button>
-    <span id="add-image-error-message" class="d-none" style="color: red">Error message</span>
-    {% endbuttons %}
-  </form>
+    <div class="container float-left d-inline-flex">
+        <form action="{% url 'home' %}" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {% bootstrap_form new_image_form layout='inline' %}
+            {% buttons %}
+            <button id="add-image-button" type="submit" class="btn btn-primary" disabled>Submit</button>
+            <span id="add-image-error-message" class="d-none" style="color: red">Error message</span>
+            {% endbuttons %}
+        </form>
+    </div>
 </div>
 {% with img_object=related_images|first %}
 {% if img_object %}
