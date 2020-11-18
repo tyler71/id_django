@@ -29,29 +29,33 @@ Variables needed:
 {% with img_object=related_images|first %}
 {% if img_object %}
 <div class="container center">
-  <div class="row">
-    <div class="card col">
-      <a href="{{ img_object.result.url }}"><img class="card-img-top" src="{{ img_object.result.url }}"></a>
-      <p class="card-body">{{ img_object.conversion }} using {{ img_object.images_used }} images</p>
-      <p class="card-text ml-1"><small class="text-muted">Uploaded on {{ img_object.submitted | date:'l jS' }}</small></p>
+    <div class="row">
+    <div class="col">
+        <figure>
+            <a href="{{ img_object.result.url }}"><img class="w-100" src="{{ img_object.result.url }}"
+                 alt="{{ img_object.conversion }} conversion using {{ img_object.images_used }} images on {{ img_object.submitted | date:'l jS' }}"></a>
+            <figcaption>{{ img_object.conversion }} conversion using {{ img_object.images_used }} images on {{ img_object.submitted | date:'l jS' }}</figcaption>
+        </figure>
     </div>
-  </div>
+    </div>
 </div>
 {% endif %}
 {% endwith %}
 {% if related_images %}
 <div class="container">
-  <div class="row row-cols-lg-2 row-cols-md-3 row-cols-1">
-  {% for img_object in related_images %}
-  {% if not forloop.first %}
-      <div class="card col">
-        <a href="{{ img_object.result.url }}"><img class="card-img-top" src="{{ img_object.result.url }}" loading="lazy"></a>
-        <p class="card-body">{{ img_object.conversion}} using {{ img_object.images_used }} images</p>
-        <p class="card-text ml-1"><small class="text-muted">Uploaded on {{ img_object.submitted | date:'l jS' }}</small></p>
-      </div>
-   {% endif %}
-   {% endfor %}
-  </div>
+    <div class="row row-cols-lg-2 row-cols-md-3 row-cols-1">
+        {% for img_object in related_images %}
+        {% if not forloop.first %}
+        <div class="col">
+            <figure>
+                <a href="{{ img_object.result.url }}"><img class="w-100" src="{{ img_object.result.url }}"
+                     alt="{{ img_object.conversion }} conversion using {{ img_object.images_used }} images on {{ img_object.submitted | date:'l jS' }}"></a>
+                <figcaption>{{ img_object.conversion }} conversion using {{ img_object.images_used }} images on {{ img_object.submitted | date:'l jS' }}</figcaption>
+            </figure>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
 </div>
 {% endif %}
 {% endblock %}
