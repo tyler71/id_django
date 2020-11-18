@@ -137,9 +137,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "data/static")
 
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "convertimage/static"),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, "convertimage/static"),
+# )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "data/uploads")
 MEDIA_URL  = '/uploads/'
