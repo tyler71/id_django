@@ -19,11 +19,14 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from convertimage import views as convertimage
+from . import views as general
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', convertimage.HomePage.as_view(), name='home'),
-    path('api-auth/', include('rest_framework.urls')),
+    # path('api-auth/', include('rest_framework.urls')),
+    path('login', general.LoginPage.as_view(), name='login'),
+    path('dashboard', general.DashboardPage.as_view(), name='dashboard'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

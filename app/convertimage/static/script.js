@@ -1,18 +1,20 @@
-const FILESELECTED = document.querySelector("#id_images").files;
-const FILES = document.querySelector("#id_images");
-const SUBMITBUTTON = document.querySelector("#add-image-button");
-const SUBMITERRORMSG = document.querySelector("#add-image-error-message");
 
 // Make sure 3 or more images are selected
-FILES.addEventListener('change', (event) => {
-    if (FILESELECTED.length > 0 && FILESELECTED.length < 3) {
-        SUBMITBUTTON.disabled = true;
-        SUBMITBUTTON.classList.add("disabled");
-        SUBMITERRORMSG.classList.remove("d-none");
-        SUBMITERRORMSG.innerHTML = "Select 3 or more images!"
-    } else {
-        SUBMITBUTTON.disabled = false;
-        SUBMITBUTTON.classList.remove("disabled");
-        SUBMITERRORMSG.classList.add("d-none");
-    }
-});
+const FILES = document.querySelector("#id_images");
+if (FILES != null) {
+    FILES.addEventListener('change', (event) => {
+        let numberFiles = FILES.files.length;
+        const submitbutton = document.querySelector("#add-image-button");
+        const submiterrormsg = document.querySelector("#add-image-error-message");
+        if (numberFiles > 0 && numberFiles < 3) {
+            submitbutton.disabled = true;
+            submitbutton.classList.add("disabled");
+            submiterrormsg.classList.remove("d-none");
+            submiterrormsg.innerHTML = "Select 3 or more images!"
+        } else {
+            submitbutton.disabled = false;
+            submitbutton.classList.remove("disabled");
+            submiterrormsg.classList.add("d-none");
+        }
+    });
+}
