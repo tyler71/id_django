@@ -3,6 +3,7 @@ const FILES = document.querySelector("#id_images");
 const SUBMITBUTTON = document.querySelector("#add-image-button");
 const SUBMITERRORMSG = document.querySelector("#add-image-error-message");
 
+// Make sure 3 or more images are selected
 FILES.addEventListener('change', (event) => {
     if (FILESELECTED.length > 0 && FILESELECTED.length < 3) {
         SUBMITBUTTON.disabled = true;

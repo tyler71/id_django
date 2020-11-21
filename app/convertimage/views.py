@@ -12,9 +12,12 @@ from .utils import conversion_choices
 log = logging.getLogger(__name__)
 
 class HomePage(View):
-    def get(self, request):
+    def setup(self, request, *args, **kwargs):
         if request.session.get('related_images', None) is None:
             request.session['related_images'] = list()
+        super(HomePage, self).setup(request, *args, **kwargs)
+
+    def get(self, request):
         session_rel_img = request.session['related_images']
         log.info(session_rel_img)
         log.info(f"INFO: views/home | Session has {len(session_rel_img)} files")
@@ -25,16 +28,10 @@ class HomePage(View):
         }
         return render(request, 'home.html', context)
     def post(self, request):
-        if request.session.get('related_images', None) is None:
-            request.session['related_images'] = list()
-        if request.method == 'POST':
-            data = self._process_images(request.POST, request.FILES)
-            request.session['related_images'].append(data.pk)
-            request.session.modified = True
-        session_rel_img = request.session['related_images']
-        log.info(session_rel_img)
-        log.info(f"INFO: views/home | Session has {len(session_rel_img)} files")
-        related_images = self._related_ordered_images(session_rel_img)
+        data = self._process_images(request.POST, request.FILES)
+        request.session['related_images'].append(data.pk)
+        request.session.modified = True
+        related_images = self._related_ordered_images(request.session['related_images'])
         context = {
             'related_images': related_images,
             'new_image_form': NewImageForm(),
