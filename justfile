@@ -20,8 +20,8 @@ shell:
     docker container exec -it "$DB" ./manage.py shell
 
 build:
-    docker image build -t tyler71/image_difference --target prod .
-    docker image push tyler71/image_difference:latest
+    docker image build -t docker.xyzz.work/image_difference:latest --target prod .
+    docker image push docker.xyzz.work/image_difference:latest
 dev:
     docker-compose -f docker-compose.yml build
     docker-compose -f docker-compose.yml up -d
