@@ -1,4 +1,5 @@
 from django.db import models
+from image_difference.models import User
 
 
 class ImageUnit(models.Model):
@@ -7,5 +8,5 @@ class ImageUnit(models.Model):
     conversion   = models.CharField(max_length=20)
     submitted    = models.DateTimeField(auto_now_add=True)
     img_hash     = models.CharField(max_length=50)
-    # submitted_by = models.ForeignKey(Users, on_delete=models.CASCADE)
+    submitted_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 

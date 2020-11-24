@@ -28,7 +28,8 @@ class HomePage(View):
         }
         return render(request, 'home.html', context)
     def post(self, request):
-        data = self._process_images(request.POST, request.FILES)
+        current_user = request.user if request.user.is_authenticated else None
+        data = self._process_images(request.POST, request.FILES, current_user)
         request.session['related_images'].append(data.pk)
         request.session.modified = True
         related_images = self._related_ordered_images(request.session['related_images'])
@@ -47,7 +48,7 @@ class HomePage(View):
         return ordered
 
     @staticmethod
-    def _process_images(post, files):
+    def _process_images(post, files, username=None):
         form = NewImageForm(post, files)
         if form.is_valid():
             submitted_images = [img for img in files.getlist('images')]
@@ -62,6 +63,8 @@ class HomePage(View):
             data.images_used = img_count
             data.conversion = selected_method
             data.submitted = datetime.now()
+            if username is not None:
+                data.submitted_by = username
             data.result.save(converted_img_name, InMemoryUploadedFile(
                 converted_img,
                 None,

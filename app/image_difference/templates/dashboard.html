@@ -1,3 +1,20 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 
+{% block content %}
+{% if related_images %}
+<div class="container">
+    <div class="row row-cols-lg-2 row-cols-md-3 row-cols-1">
+        {% for img_object in related_images %}
+        <div class="col">
+            <figure>
+                <a href="{{ img_object.result.url }}"><img class="w-100" src="{{ img_object.result.url }}"
+                                                           alt="{{ img_object.conversion }} conversion using {{ img_object.images_used }} images on {{ img_object.submitted | date:'l jS' }}"></a>
+                <figcaption>{{ img_object.conversion }} conversion using {{ img_object.images_used }} images on {{ img_object.submitted | date:'l jS' }}</figcaption>
+            </figure>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
