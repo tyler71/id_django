@@ -26,14 +26,20 @@ class LoginPage(View):
             return render(request, 'login.html')
         else:
             login(request, user)
+            session_rel_img = request.session['related_images']
+            session_rel_img = ImageUnit.objects.filter(pk__in=session_rel_img)
+            self.associate_images(session_rel_img, user)
             return redirect('dashboard')
-    # def associate_images(self, ):
+    def associate_images(self, session_rel_images, user):
+        for image in session_rel_images:
+            image.submitted_by = user
+            image.save()
 
 class DashboardPage(View):
     def get(self, request):
         if request.user.is_authenticated is True:
             session_rel_img = request.session['related_images']
-            session_rel_img = ImageUnit.objects.filter(pk__in=session_rel_img)
+            # session_rel_img = ImageUnit.objects.filter(pk__in=session_rel_img)
             user_rel_img = ImageUnit.objects.filter(submitted_by=request.user).order_by("-submitted")
             # Set to remove duplicates, chain to concat session images and user images
             related_images = set(chain(session_rel_img, user_rel_img))
