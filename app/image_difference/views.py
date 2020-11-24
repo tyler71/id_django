@@ -1,25 +1,37 @@
+import logging
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout, login
+
+log = logging.getLogger(__name__)
 
 class LoginPage(View):
     def get(self, request):
+        log.info(f"is user authenticated? {request.user.is_authenticated}")
         if request.user.is_authenticated is True:
-            return redirect ('home')
-        return render(request, 'login.html')
+            return redirect('home')
+        else:
+            return render(request, 'login.html')
     def post(self, request):
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(username=username, password=password)
         if user is None:
-            return HttpResponse("failed to login")
+            return render(request, 'login.html')
         else:
-            return redirect('home')
+            login(request, user)
+            return redirect('dashboard')
 
 class DashboardPage(View):
     def get(self, request):
         if request.user.is_authenticated is True:
-            return HttpResponse("dashboard")
+            return render(request, 'dashboard.html')
         else:
-            return HttpResponse("denied")
+            return redirect('login')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
