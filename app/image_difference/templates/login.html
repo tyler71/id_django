@@ -7,14 +7,17 @@ Login page
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="container">
-        <form method="post" enctype="multipart/form-data" >
-            <input type="text" name="username"/>
-            <input type="password" name="password"/>
-            {% buttons %}
-            <button type="submit" class="button btn-primary"></button>
-            {% endbuttons %}
+<div class="container" id="convert">
+    <h1>Login</h1>
+    <div class="container d-inline-flex">
+        <form action="{% url 'home' %}" enctype="multipart/form-data" method="post">
             {% csrf_token %}
+            {% bootstrap_form login_form layout='inline' %}
+            {% buttons %}
+            <button id="add-image-button" type="submit" class="btn btn-primary">Submit</button>
+            <span id="add-image-error-message" class="d-none" style="color: red">Error message</span>
+            {% endbuttons %}
         </form>
+    </div>
 </div>
 {% endblock %}

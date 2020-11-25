@@ -10,8 +10,8 @@
     <script src="{% static 'script.js' %}" defer></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
-{% include '_navbar.html' %}
 <body>
+{% include '_navbar.html' %}
 <main id="main">
         {% block content %}{% endblock %}
 </main>
