@@ -5,10 +5,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 
-from convertimage.forms import NewImageForm
 from convertimage.models import ImageUnit
 
-from .forms import LoginForm
+from .forms import LoginForm, SignupForm
 
 log = logging.getLogger(__name__)
 
@@ -18,7 +17,7 @@ class LoginPage(View):
         if request.user.is_authenticated is True:
             return redirect('dashboard')
         else:
-            return render(request, 'login.html', {'login_form': LoginForm(), "a": NewImageForm()})
+            return render(request, 'login.html', {'login_form': LoginForm(), "signup_form": SignupForm()})
     def post(self, request):
         username = request.POST["username"]
         password = request.POST["password"]

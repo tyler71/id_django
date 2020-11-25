@@ -8,16 +8,32 @@ Login page
 
 {% block content %}
 <div class="container" id="convert">
-    <h1>Login</h1>
-    <div class="container d-inline-flex">
-        <form action="{% url 'home' %}" enctype="multipart/form-data" method="post">
-            {% csrf_token %}
-            {% bootstrap_form login_form layout='inline' %}
-            {% buttons %}
-            <button id="add-image-button" type="submit" class="btn btn-primary">Submit</button>
-            <span id="add-image-error-message" class="d-none" style="color: red">Error message</span>
-            {% endbuttons %}
-        </form>
+    <div class="row row-cols-sm-2 row-cols-1">
+        <div class="col text-center">
+            <h1>Login</h1>
+            <div class="container justify-content-center d-inline-flex">
+                <form action="{% url 'login' %}" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form login_form layout='inline' %}
+                    {% buttons %}
+                    <button id="login-button" type="submit" class="btn btn-primary">Login</button>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+        <div class="col text-center">
+            <h1>Sign Up</h1>
+            <div class="container justify-content-center d-inline-flex">
+                <form action="{% url 'login' %}" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form signup_form layout='inline' %}
+                    {% buttons %}
+                    <button id="signup-button" type="submit" class="btn btn-primary">Sign Up</button>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
     </div>
 </div>
+    </div>
 {% endblock %}
