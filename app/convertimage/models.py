@@ -8,5 +8,5 @@ class ImageUnit(models.Model):
     conversion   = models.CharField(max_length=20)
     submitted    = models.DateTimeField(auto_now_add=True)
     img_hash     = models.CharField(max_length=50)
-    submitted_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    submitted_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 

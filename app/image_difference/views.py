@@ -27,10 +27,12 @@ class LoginPage(View):
         else:
             login(request, user)
             session_rel_img = request.session['related_images']
-            session_rel_img = ImageUnit.objects.filter(pk__in=session_rel_img)
             self.associate_images(session_rel_img, user)
             return redirect('dashboard')
-    def associate_images(self, session_rel_images, user):
+
+    @staticmethod
+    def associate_images(session_rel_images, user):
+        session_rel_images = ImageUnit.objects.filter(pk__in=session_rel_images)
         for image in session_rel_images:
             image.submitted_by = user
             image.save()
@@ -42,10 +44,10 @@ class DashboardPage(View):
             # session_rel_img = ImageUnit.objects.filter(pk__in=session_rel_img)
             user_rel_img = ImageUnit.objects.filter(submitted_by=request.user).order_by("-submitted")
             # Set to remove duplicates, chain to concat session images and user images
-            related_images = set(chain(session_rel_img, user_rel_img))
+            # related_images = set(chain(session_rel_img, user_rel_img))
 
             context = {
-                'related_images': related_images,
+                'related_images': user_rel_img,
             }
             return render(request, 'dashboard.html', context)
         else:
