@@ -137,6 +137,8 @@ USE_TZ = True
 
 AUTH_USER_MODEL = "image_difference.User"
 
+LOGIN_URL = 'login'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 

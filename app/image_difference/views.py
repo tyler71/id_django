@@ -1,11 +1,9 @@
 import logging
-from itertools import chain
 
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, logout, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth import authenticate, logout, login
-
 
 from convertimage.models import ImageUnit
 
@@ -32,19 +30,15 @@ class LoginPage(View):
 
     @staticmethod
     def associate_images(session_rel_images, user):
-        session_rel_images = ImageUnit.objects.filter(pk__in=session_rel_images)
+        session_rel_images = ImageUnit.objects.filter(pk__in=session_rel_images, submitted_by__exact=None)
         for image in session_rel_images:
             image.submitted_by = user
             image.save()
 
-class DashboardPage(View):
+class DashboardPage(LoginRequiredMixin, View):
     def get(self, request):
         if request.user.is_authenticated is True:
-            session_rel_img = request.session['related_images']
-            # session_rel_img = ImageUnit.objects.filter(pk__in=session_rel_img)
             user_rel_img = ImageUnit.objects.filter(submitted_by=request.user).order_by("-submitted")
-            # Set to remove duplicates, chain to concat session images and user images
-            # related_images = set(chain(session_rel_img, user_rel_img))
 
             context = {
                 'related_images': user_rel_img,
