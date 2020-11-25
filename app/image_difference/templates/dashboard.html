@@ -5,10 +5,11 @@
 <div class="container">
     <div class="jumbotron">
         <h1 class="display-4">Hi {{ user.username | title }},</h1>
-        {% if relates_images %}
-        <p class="lead">Here's your images</p>
+        {% if related_images %}
+        <p class="lead">You have {{ related_images | length }} images, nice! </p>
+        <p class="lead">Create another one <a href="{% url 'home' %}">here!</a></p>
         {% else %}
-        <p class="lead">no images uploaded yet?</p>
+        <p class="lead">No images uploaded yet?</p>
         <p class="lead">That's ok, <a href="{% url 'home' %}">Create one here!</a></p>
         {% endif %}
     </div>
