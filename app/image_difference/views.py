@@ -38,14 +38,14 @@ class LoginPage(View):
             password = form.cleaned_data["password"]
             user = authenticate(username=username, password=password)
             if user is None:
-                return render(request, 'login.html', {'login_form': LoginForm(), "signup_form": SignupForm()})
+                return render(request, 'login.html', {'login_form': LoginForm(request.POST), "signup_form": SignupForm()})
             else:
                 login(request, user)
                 session_rel_img = request.session['related_images']
                 self.associate_images(session_rel_img, user)
                 return redirect('dashboard')
         else:
-            return render(request, 'login.html', {'login_form': LoginForm(), "signup_form": SignupForm()})
+            return render(request, 'login.html', {'login_form': LoginForm(request.POST), "signup_form": SignupForm()})
 
     def _signup(self, request):
         form = SignupForm(request.POST)
@@ -61,7 +61,7 @@ class LoginPage(View):
             self.associate_images(session_rel_img, user)
             return redirect('dashboard')
         else:
-            return render(request, 'login.html', {'login_form': LoginForm(), "signup_form": SignupForm()})
+            return render(request, 'login.html', {'login_form': LoginForm(), "signup_form": SignupForm(request.POST)})
 
     @staticmethod
     def associate_images(session_rel_images, user):

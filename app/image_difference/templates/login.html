@@ -14,6 +14,7 @@ Login page
             <div class="container justify-content-center d-inline-flex">
                 <form action="{% url 'login' %}" enctype="multipart/form-data" method="post">
                     {% csrf_token %}
+                    {% bootstrap_form_errors login_form layout='inline' %}
                     {% bootstrap_form login_form layout='inline' %}
                     {% buttons %}
                     <button id="login-button" type="submit" class="btn btn-primary">Login</button>
@@ -26,6 +27,7 @@ Login page
             <div class="container justify-content-center d-inline-flex">
                 <form action="{% url 'login' %}" enctype="multipart/form-data" method="post">
                     {% csrf_token %}
+                    {% bootstrap_form_errors signup_form layout='inline' %}
                     {% bootstrap_form signup_form layout='inline' %}
                     {% buttons %}
                     <button id="signup-button" type="submit" class="btn btn-primary">Sign Up</button>
