@@ -29,7 +29,7 @@ class ImageArray:
     def return_image(self):
         buffer = BytesIO()
         img = Image.fromarray(self.flattened_image_array.astype('uint8'))
-        img.save(fp=buffer, format="JPEG")
+        img.save(fp=buffer, format="PNG")
         return ContentFile(buffer.getvalue())
 
     def image_hash(self):
