@@ -1,5 +1,5 @@
 # ======== Development
-FROM python as dev
+FROM python:3.8-buster as dev
 
 EXPOSE 8000
 
@@ -10,17 +10,14 @@ RUN apt-get update \
 WORKDIR /app
 
 COPY requirements.txt /
-RUN pip install --no-cache-dir numpy==1.19.4 \
-                               pillow==8.0.1 \
-                               django-debugtools \
- && pip install --no-cache-dir -r /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
 
 USER 1000
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 # ======== Production
-FROM python:slim as prod
+FROM python:3.8-slim-buster as prod
 
 EXPOSE 8000
 
