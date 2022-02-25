@@ -9,8 +9,8 @@ services:
             - SECRET_KEY
         labels:
             caddy: ${HOST}
-            caddy.reverse_proxy: "{{ upstreams 8080 }}"
-        build: 
+            caddy.reverse_proxy: "{{ upstreams 8000 }}"
+        build:
             context: .
             target: prod
         networks:

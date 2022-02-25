@@ -19,16 +19,16 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          justlogin: true
+          heroku_email:   ${{secrets.HEROKU_EMAIL}}
+          justlogin:      true
 
       - name: Build
         uses: docker/build-push-action@v2
-        env:
         with:
-          context: .
-          push: true
-          tags: registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
+          context:    .
+          target:     production
+          push:       true
+          tags:       registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
           cache-from: type=gha
           cache-to:   type=gha,mode=max
 
