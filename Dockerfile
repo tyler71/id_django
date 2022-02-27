@@ -9,6 +9,8 @@ RUN apt-get update \
 
 WORKDIR /app
 
+RUN /usr/local/bin/python -m pip install --upgrade pip
+
 COPY requirements.txt /
 RUN pip install --no-cache-dir -r /requirements.txt
 
@@ -21,6 +23,7 @@ FROM python:3.8-slim-buster as prod
 
 EXPOSE 8000
 
+RUN /usr/local/bin/python -m pip install --upgrade pip
 
 COPY --from=caddy /usr/bin/caddy /usr/bin/caddy
 
@@ -31,6 +34,7 @@ RUN pip install --no-cache-dir numpy==1.19.4    \
  && pip install --no-cache-dir -r /requirements.txt
 
 COPY ./entrypoint.sh /
+COPY ./init.sh /
 COPY ./config/reverse_proxy/Caddyfile /etc/caddy/Caddyfile
 COPY ./config/init/supervisord.conf /etc/supervisord.conf
 
@@ -47,7 +51,7 @@ RUN mkdir /app /data               \
 
 COPY --chown=application:application ./app/ /app/
 
-CMD ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/init.sh"]
 
 # ======== Quality Assurance
 FROM prod as qa

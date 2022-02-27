@@ -10,9 +10,9 @@ services:
         labels:
             caddy: ${HOST}
             caddy.reverse_proxy: "{{ upstreams 8000 }}"
-        build: 
+        build:
             context: .
-            target: dev
+            target: prod
         volumes:
             - ./app:/app
         networks:
