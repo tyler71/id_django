@@ -31,13 +31,23 @@ RUN pip install --no-cache-dir numpy==1.19.4    \
  && pip install --no-cache-dir -r /requirements.txt
 
 COPY ./entrypoint.sh /
-COPY ./Caddyfile /etc/caddy/Caddyfile
+COPY ./config/reverse_proxy/Caddyfile /etc/caddy/Caddyfile
+COPY ./config/init/supervisord.conf /etc/supervisord.conf
 
-USER 1000
-COPY --chown=1000:1000 ./app/ /app/
+RUN mkdir /app /data               \
+ && groupadd application           \
+      --gid 1000                   \
+ && useradd application            \
+      --base-dir /app              \
+      --home-dir /home/application \
+      --create-home                \
+      --uid 1000                   \
+      --gid 1000                   \
+      --system
 
-WORKDIR /app
-CMD ["/entrypoint.sh"]
+COPY --chown=application:application ./app/ /app/
+
+CMD ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
 # ======== Quality Assurance
 FROM prod as qa
@@ -47,7 +57,7 @@ RUN apt-get update \
  && apt-get install -y sqlite3 curl procps \
  && rm -r /var/lib/apt/lists/*
 
-USER 1000
+USER application
 
 WORKDIR /app
 CMD ["/entrypoint.sh"]
