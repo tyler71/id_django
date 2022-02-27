@@ -8,7 +8,7 @@ for pid in \
   /var/run/supervisord.pid
 do
   touch "$pid"
-  chown application: "$pid"
+  chown application:application "$pid"
 done
 
 /usr/local/bin/supervisord -c /etc/supervisord.conf
