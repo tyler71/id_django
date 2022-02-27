@@ -31,7 +31,9 @@ jobs:
           context:    .
           target:     prod
           push:       true
-          tags:       registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
+          tags:       |
+            registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
+            ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest
           cache-from: type=gha
           cache-to:   type=gha,mode=max
 
