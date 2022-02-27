@@ -7,14 +7,16 @@ services:
             - DEBUG
             - LOG
             - SECRET_KEY
+            - USER=${USER}
         labels:
             caddy: ${HOST}
             caddy.reverse_proxy: "{{ upstreams 8000 }}"
+#       image: ghcr.io/tyler71/id_django:latest
         build:
             context: .
             target: prod
-        volumes:
-            - ./app:/app
+#       volumes:
+#           - ./app:/app
         networks:
             - caddy
 
