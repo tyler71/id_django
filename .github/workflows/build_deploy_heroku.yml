@@ -41,6 +41,7 @@ jobs:
           tags:       |
             registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
             ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:latest
+            ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:${{ github.run_number }}
           cache-from: type=gha
           cache-to:   type=gha,mode=max
 
