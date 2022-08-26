@@ -1,4 +1,4 @@
-name: Build and deploy to heroku
+name: Build and deploy to flyio
 
 on:
 # create:
