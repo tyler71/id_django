@@ -9,6 +9,6 @@
         file_server
     }
     handle {
-        reverse_proxy localhost:8000
+        reverse_proxy localhost:35252
     }
 }
