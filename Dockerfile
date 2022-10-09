@@ -20,8 +20,8 @@ COPY ./app/ /app/
 CMD ["/init.sh"]
 
 
-FROM prod as dev
-USER 1000
-
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# FROM prod as dev
+# USER 1000
+#
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 

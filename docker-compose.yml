@@ -8,6 +8,9 @@ services:
             - LOG
             - SECRET_KEY
             - USER=${USER}
+            - PORT=8000
+        logging:
+            driver: "json-file"
         labels:
             caddy: ${HOST}
             caddy.reverse_proxy: "{{ upstreams 8000 }}"
@@ -18,8 +21,8 @@ services:
 #       volumes:
 #           - ./app:/app
         networks:
-            - caddy
+            - public
 
 networks:
-    caddy:
-        external: true
+  public:
+    external: true
