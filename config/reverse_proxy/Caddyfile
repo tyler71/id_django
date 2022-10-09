@@ -1,5 +1,7 @@
 :{$PORT} {
-#   log
+    log {
+        output stdout
+    }
     handle /uploads/* {
         root * /app/data
         file_server
