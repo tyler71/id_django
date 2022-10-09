@@ -13,6 +13,7 @@ RUN pip install --no-cache-dir -r /requirements.txt \
 COPY ./init.sh /
 COPY ./config/reverse_proxy/Caddyfile /etc/caddy/Caddyfile
 COPY ./config/init/supervisord.conf /etc/supervisord.conf
+COPY ./config/gunicorn.py /etc/gunicorn.py
 
 COPY ./app/ /app/
 

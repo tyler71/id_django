@@ -7,22 +7,19 @@ processes = []
 
 [env]
 
-  PORT=8080
+  PORT=8000
 
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
 
+[build]
+  build-target = "prod"
+
 [[services]]
-  http_checks = []
-  internal_port = 8080
-  processes = ["app"]
+  internal_port = 8000
   protocol = "tcp"
   script_checks = []
-  [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-    type = "connections"
 
   [[services.ports]]
     force_https = false

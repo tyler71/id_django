@@ -34,3 +34,5 @@ prod:
     docker-compose -f docker-compose.prod.yml build
     docker-compose -f docker-compose.prod.yml up -d
     docker-compose logs -f
+fly:
+    flyctl deploy --remote-only --build-target prod
